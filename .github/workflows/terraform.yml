@@ -1,6 +1,11 @@
 name: Terraform CD
 on: 
   workflow_dispatch:
+    inputs:
+      action:
+        type: string 
+        description: please type apply or destroy
+        
 
 jobs: 
   deploy:

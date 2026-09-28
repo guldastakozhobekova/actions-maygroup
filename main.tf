@@ -1,6 +1,7 @@
 provider "aws" {
   region = "us-west-1"
 }
+
 terraform {
   backend "s3" {
     bucket = "guldasta-terraform-backend"

@@ -10,5 +10,8 @@ jobs:
       - uses: actions/checkout@v7
         name: Checkout repository
 
+      - name: Download Terraform
+        uses: hashicorp/setup-terraform@v4
+
       - name: Terraform init
         run: terraform init

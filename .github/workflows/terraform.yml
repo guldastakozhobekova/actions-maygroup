@@ -6,9 +6,9 @@ on:
 jobs: 
   deploy:
     runs-on: ubuntu-latest
-  steps:
+    steps:
       - uses: actions/checkout@v7
         name: Checkout repository
 
-      - name: Terrafrom init
+      - name: Terraform init
         run: terraform init

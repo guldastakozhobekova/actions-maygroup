@@ -1,6 +1,14 @@
 provider "aws" {
   region = "us-west-1"
 }
+terraform {
+  backend "s3" {
+    bucket = "guldasta-terraform-backend"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
+  }
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 

@@ -7,7 +7,35 @@ on:
         options: 
           - apply
           - destroy
-        description: please type apply or destroy
+        description: please select apply or destroy
+
+      region:
+        type: choice
+        options: 
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2  
+        description: please type select region
+
+      instace_type:
+        type: string
+        description: please provide instance type
+        
+      instace_name :
+        type: string
+        description: please provide instance name
+
+    
+      region:
+        type: string
+        description: please enter the AWS region
+      instance_type:
+        type: string
+        description: please enter the instance type
+      instance_name:
+        type: string
+        description: please enter the instance name
 
 
 jobs: 

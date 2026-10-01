@@ -25,19 +25,7 @@ on:
       instace_name :
         type: string
         description: please provide instance name
-
-    
-      region:
-        type: string
-        description: please enter the AWS region
-      instance_type:
-        type: string
-        description: please enter the instance type
-      instance_name:
-        type: string
-        description: please enter the instance name
-
-
+        
 jobs: 
   deploy:
     runs-on: ubuntu-latest

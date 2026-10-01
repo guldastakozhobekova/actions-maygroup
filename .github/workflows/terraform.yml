@@ -25,7 +25,7 @@ on:
       instace_name :
         type: string
         description: please provide instance name
-        
+
 jobs: 
   deploy:
     runs-on: ubuntu-latest
@@ -43,6 +43,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
+
+      - name: Create tfvars file
+        run: |
+          cat <<EOF > terraform.tfvars
+          instance_name = "${{ inputs.instance_name }}"
+          instance_type = "${{ inputs.instance_type }}"
+          region = "${{ inputs.region }}"
+          EOF   
 
       - name: Terraform init
         run: terraform init

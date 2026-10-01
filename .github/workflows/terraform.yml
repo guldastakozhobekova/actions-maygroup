@@ -35,11 +35,9 @@ jobs:
 
       - name: Create tfvars file
         run: |
-          cat <<EOF > terraform.tfvars
-          instance_name = "${{ inputs.instance_name }}"
-          instance_type = "${{ inputs.instance_type }}"
-          region = "${{ inputs.region }}"
-          EOF  
+          echo 'instance_name = "${{ inputs.instance_name }}"' > terraform.tfvars
+          echo 'instance_type = "${{ inputs.instance_type }}"' >> terraform.tfvars
+          echo 'region = "${{ inputs.region }}"' >> terraform.tfvars
 
       - name: Download Terraform
         uses: hashicorp/setup-terraform@v4

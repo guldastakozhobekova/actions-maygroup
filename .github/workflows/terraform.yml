@@ -9,35 +9,27 @@ on:
           - destroy
         description: please select apply or destroy
 
-      region:
+      enviroment:
         type: choice
         options: 
           - us-east-1
           - us-east-2
           - us-west-1
           - us-west-2  
-        description: please type select region
+        description: please type select environment
 
-      instance_type:
-        type: string
-        description: please provide instance type
-        
-      instance_name :
-        type: string
-        description: please provide instance name
+      
 
 jobs: 
   deploy:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.enviroment }}
     steps:
       - uses: actions/checkout@v7
         name: Checkout repository
 
       - name: Create tfvars file
-        run: |
-          echo 'instance_name = "${{ inputs.instance_name }}"' > terraform.tfvars
-          echo 'instance_type = "${{ inputs.instance_type }}"' >> terraform.tfvars
-          echo 'region = "${{ inputs.region }}"' >> terraform.tfvars
+        run: echo "${{vars.TFVARS}}" > terraform.tfvars
 
       - name: Download Terraform
         uses: hashicorp/setup-terraform@v4
@@ -48,12 +40,14 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          aws-region: {{input.enviroment}}
 
       
 
       - name: Terraform init
-        run: terraform init
+        run: terraform init -backend-config=key=${{ inputs.enviroment }}/terraform.tfvars
+        #because terraform init 1.loads plugins 2.initializes the backend S3
+
       - name: terraform apply
         run: terraform apply -auto-approve
         if: ${{ inputs.action == 'apply' }}

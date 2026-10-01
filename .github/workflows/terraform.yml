@@ -18,11 +18,11 @@ on:
           - us-west-2  
         description: please type select region
 
-      instace_type:
+      instance_type:
         type: string
         description: please provide instance type
         
-      instace_name :
+      instance_name :
         type: string
         description: please provide instance name
 
@@ -40,7 +40,7 @@ jobs:
           instance_type = "${{ inputs.instance_type }}"
           region = "${{ inputs.region }}"
           EOF  
-          
+
       - name: Download Terraform
         uses: hashicorp/setup-terraform@v4
 

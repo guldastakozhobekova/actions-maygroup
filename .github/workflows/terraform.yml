@@ -48,10 +48,11 @@ jobs:
         run: terraform init -backend-config=key=${{ inputs.enviroment }}/terraform.tfvars
         #because terraform init 1.loads plugins 2.initializes the backend S3
 
-      - name: terraform apply
-        run: terraform apply -auto-approve
-        if: ${{ inputs.action == 'apply' }}
-
-      - name: Terraform destroy
-        run: terraform destroy -auto-approve
-        if: ${{ inputs.action == 'destroy' }}
+      - name: Terraform Apply or Destroy
+        run: |
+          if [[ ${{ inputs.action }} == "apply" ]]
+          then
+            terraform apply -auto-approve
+          else
+            terraform destroy -auto-approve
+          fi
